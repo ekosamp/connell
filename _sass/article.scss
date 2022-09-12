@@ -1,0 +1,220 @@
+.article {
+  background: linear-gradient(180deg, $color-grey-light 0%, rgba(255, 255, 255, 0) 16.81%);
+  h1 {
+    font-family: $font-serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 2.6em;
+    line-height: 1.4em;
+    text-align: center;
+    max-width: 544px;
+    margin: 0 auto;
+    @media screen and (max-width: $break-mobile) {
+      font-size: 2em;
+    }
+  }
+  h2:not(#newsletter__heading),
+  h3:not(.section h3) {
+    font-size: 1.6em;
+    font-style: unset;
+    text-align: center;
+    margin: 4em 0 0;
+  }
+  p:not(.section p, .details p, .article-info-static p, .article-info-details p, .followup__container p) {
+    font-size: 1.2em;
+    color: $color-ink;
+    margin: 2em auto;
+    max-width: calc(#{$max-width-condensed} - #{$guttersize});
+  }
+  img:not(.article_thumbnail img, .product img, .product_image img) {
+    border-radius: $border-radius-large;
+    width: 100%;
+    margin: 2em 0 0;
+
+    &.inline {
+      width: calc(50% - 4px);
+      display: inline-block;
+      margin: 0 2px;
+    }
+  }
+  em {
+    font-size: 0.9em;
+    color: lighten($color-ink-muted, 10);
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    margin: 0 0 2em;
+  }
+  .card,
+  .audio {
+    max-width: calc(#{$max-width-condensed} - #{$guttersize});
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.followup__container {
+  padding: 4em 0 2em;
+  max-width: calc(750px - 12em);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.article-spacer {
+  width: 100%;
+  height: 4em;
+}
+.article-info-static,
+.article-info-details {
+  margin-top: 2em;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+  .title {
+    color: $color-ink-dark;
+  }
+}
+.article-info-details {
+  justify-content: center;
+  text-align: center;
+
+  &.left {
+    justify-content: flex-start;
+    text-align: left;
+    
+    .article-details:first-of-type {
+      margin: 0 2em 0 0;
+    }
+  }
+  .article-details {
+    margin: 0 2em;
+    p {
+      line-height: 1em;
+      margin: 0;
+      &:last-of-type {
+        font-weight: 500;
+        color: $color-ink-dark;
+        margin-top: 0.4em;
+      }
+    }
+  }
+}
+.article-info-static {
+  justify-content: space-between;
+
+  &:first-of-type {
+    margin: 0 auto 2em;
+  }
+  @media screen and (max-width: $break-mobile) {
+    flex-wrap: wrap;
+    margin-bottom: 2em;
+    p {
+      width: 100%;
+      margin: 0.2em 0;
+    }
+  }
+}
+.article_thumbnail {
+  width: 100%;
+  height: 400px;
+  background: $color-grey;
+  border-radius: $border-radius-large;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media screen and (max-width: $break-mobile) {
+    height: 225px;
+  }
+}
+#swup-article-info {
+  position: fixed;
+  pointer-events: none;
+  width: 100%;
+  max-width: $site-max-width;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 95;
+}
+.article-info {
+  padding: 1em 0;
+  width: 100%;
+  background: $color-white;
+  border-bottom: 1px solid $color-border;
+  transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(-100%);
+  text-align: center;
+
+  &.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+  
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  .details {
+    p {
+      font-size: 1em;
+      margin: 0;
+      line-height: 1em;
+      &.title {
+        font-weight: 500;
+        color: $color-ink-dark;
+        margin-bottom: 0.4em;
+      }
+    }
+  }
+}
+.articles {
+  margin-top: 2em;
+  a {
+    margin-bottom: 0.6em;
+    &:after {
+      display: none;
+    }
+  }
+  &__item {
+    margin: 10em 0;
+    .thumbnail {
+      object-fit: cover;
+      height: 300px;
+    }
+    p.description {
+      font-size: 1.2em;
+      line-height: 1.6em;
+      color: $color-ink-dark;
+      font-weight: 500;
+    }
+    .article-info-details {
+      margin: 2em 0;
+    }
+  }
+}
+.product-list {
+  a.card:not(:last-of-type) {
+    margin-bottom: 0.6em;
+  }
+}
+
+blockquote {
+  border-left: 2px solid $color-border;
+  padding: 0 2em;
+  max-width: calc(#{$max-width-condensed} - #{$guttersize});
+  margin: auto;
+  p {
+    font-size: 1.4em !important;
+    color: $color-ink-muted !important;
+    font-family: $font-serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+}

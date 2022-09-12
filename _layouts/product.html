@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include head.html %}
+  </head>
+  <body>
+    <div class="container">
+      {% assign product = page %}
+      {% include navigation.html %}
+      <div class="crop">
+        <main id="swup" class="transition-scale" aria-live="polite">
+          <div class="product-header {% if page.template_suffix == 'dark' %}dark{% endif %}">
+            <img src="{{ page.images[2].src }}">
+            <div class="wrapper">
+              <a class="btn btn__link" href="/prints/collections/all">
+                <i class="fal fa-arrow-left mr-2" aria-hidden="true"></i>
+                Shop all products
+              </a>
+              <div class="product-info">
+                <h1 class="title">{{ page.title }}</h1>
+                <p class="muted price">Starting from ${{ page.variants[0].price | money }} CAD</p>
+                <button id="buying_options" class="btn btn__dark btn__round btn__padding-large">
+                  Buying options
+                </button>
+              </div>
+            </div>
+          </div>
+          {% include shop/product-features.html %}
+          <div class="wrapper">
+            <div class="product-description">
+              {{ page.body_html }}
+            </div>
+            {% include shop/product-form.html %}
+            {% include shop/product-value.html %}
+          </div>
+          {% include pagination.html type='product' %}
+        </main>
+        {% include footer.html %}
+      </div>
+    </div>
+  </body>
+</html>

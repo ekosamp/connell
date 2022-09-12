@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include head.html %}
+  </head>
+  <body>
+    <div class="container">
+      {% include navigation.html %}
+      <div class="crop">
+        <main id="swup" class="transition-scale article" aria-live="polite">
+          <div class="wrapper margin-top">
+            <div class="article-info-static">
+              <a class="btn btn__link" href="/article" id="back-link">
+                <i class="far fa-arrow-left mr-2" aria-hidden="true"></i>
+                <span>Back to articles</span>
+              </a>
+              <button id="like_button_static" class="btn btn__link like_button processing">
+                <i class="far fa-heart like_button_icon mr-1"></i>
+                <span class="count">•</span> likes
+              </button>
+            </div>
+            <div class="article-info-static">
+              <p class="center title mb-6">{{ page.title }}</p>
+            </div>
+            <h1>{{ page.description }}</h1>
+            <div class="article-info-details">
+              {% assign article_words = content | strip_html | strip_newlines | downcase | replace: 'and','' | replace: 'the','' | split:' ' %}
+              {% assign word_count = article_words | size %}
+              <div class="article-details">
+                <p class="muted">Publish date</p>
+                <p> {{ page.date | date: "%B %d, %Y" }}</p>
+              </div>
+              <div class="article-details">
+                <p class="muted">Reading time</p>
+                <p>{{ word_count | times: 0.0076 | round }} minutes</p>
+              </div>
+            </div>
+
+            {% assign hasfollowup = site.article | where: 'followup', page.slug %}
+            {% if page.followup %}
+              <div class="followup__container">
+                <p class="followup__title">Read the original article</p>
+                {% assign followups = site.article | where: 'slug', page.followup %}
+                {% for followup in followups %}
+                  {% assign year = followup.date | date: '%Y' %}
+                  {% include card.html
+                    style = 'project grey'
+                    title = followup.title
+                    badge = year
+                    badge_color = 'grey'
+                    description = followup.description
+                    url = followup.url
+                  %}
+                {% endfor %}
+              </div>
+            {% elsif hasfollowup.size >= 1 %}
+              <div class="followup__container">
+                <p class="followup__title">Read the latest update</p>
+                {% for followup in hasfollowup %}
+                  {% assign year = followup.date | date: '%Y' %}
+                  {% include card.html
+                    style = 'project grey'
+                    title = followup.title
+                    badge = year
+                    description = followup.description
+                    url = followup.url
+                  %}
+                {% endfor %}
+              </div>
+            {% else %}
+              <div class="article-spacer"></div>
+            {% endif %}
+
+            <div class="article-content">
+              {{ content }}
+            </div>
+            
+            {% include newsletter.html %}
+
+          </div>
+          {% include pagination.html type='article' %}
+        </main>
+        {% include footer.html %}
+      </div>
+    </div>
+  </body>
+</html>
